@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">PocketAudit</string>
+    <string name="notification_listener_service_label">PocketAudit Scam Guard</string>
+    <string name="notification_listener_description">Monitors incoming banking and UPI notifications on-device for scam detection.</string>
+    
+    <!-- Dashboard Screen -->
+    <string name="active_protection">Active On-Device Scam Protection</string>
+    <string name="alerts_flagged">%d Suspicious Scam Alerts Flagged</string>
+    <string name="monitoring_subtitle">Monitoring UPI &amp; Banking Notifications • 100% Offline</string>
+    <string name="high_risk">High Risk</string>
+    <string name="medium_risk">Medium Risk</string>
+    <string name="total_scanned">Total Scanned</string>
+    <string name="filter_all">All (%d)</string>
+    <string name="filter_high">High (%d)</string>
+    <string name="filter_medium">Medium (%d)</string>
+    <string name="no_alerts_yet">No flagged alerts yet</string>
+    <string name="demo_simulator_mode">Demo Simulator Mode</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings &amp; Preferences</string>
+    <string name="appearance">Appearance &amp; Theme</string>
+    <string name="theme_system">System Default</string>
+    <string name="theme_dark">Dark Mode</string>
+    <string name="theme_light">Light Mode</string>
+    <string name="language_settings">Language / భాష</string>
+    <string name="lang_english">English</string>
+    <string name="lang_telugu">తెలుగు (Telugu)</string>
+    <string name="privacy_guarantee">100% On-Device Privacy Guarantee</string>
+    <string name="privacy_desc">PocketAudit processes all notification title and text strictly on your device. Zero internet permission is requested, ensuring no banking data ever leaves your phone.</string>
+    
+    <!-- Alert Detail Screen -->
+    <string name="alert_detail_title">Alert Audit Detail</string>
+    <string name="risk_assessment">RISK ASSESSMENT</string>
+    <string name="plain_language_explanation">Plain-Language Explanation</string>
+    <string name="matched_scam_rules">Matched Scam Pattern Rules</string>
+    <string name="original_payload">Original Notification Payload</string>
+    <string name="mark_as_safe">Mark Transaction as Safe</string>
+    <string name="delete_alert">Delete Alert</string>
+</resources>
