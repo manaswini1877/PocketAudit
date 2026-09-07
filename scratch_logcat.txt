@@ -1,0 +1,38 @@
+09-07 15:01:38.472 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.android.shell' id=2020
+09-07 15:01:38.472 D/PocketAuditService(11169): 📥 Raw Extracted Payload: pkg='com.android.shell' id=2020 title='Google' body='TestTag_19'
+09-07 15:01:38.488 D/NotificationFilter(11169): ⛔ Filtered OUT: Non-target package 'com.android.shell'
+09-07 15:01:38.488 D/PocketAuditService(11169): ⛔ Filtered OUT (NotificationFilter): pkg='com.android.shell'
+09-07 15:01:40.600 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.android.shell' id=2020
+09-07 15:01:40.601 D/PocketAuditService(11169): 📥 Raw Extracted Payload: pkg='com.android.shell' id=2020 title='Security' body='TestTag_20'
+09-07 15:01:40.615 D/NotificationFilter(11169): ⛔ Filtered OUT: Non-target package 'com.android.shell'
+09-07 15:01:40.615 D/PocketAuditService(11169): ⛔ Filtered OUT (NotificationFilter): pkg='com.android.shell'
+09-07 15:01:41.220 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.whatsapp' id=1
+09-07 15:01:41.220 D/PocketAuditService(11169): 📥 Raw Extracted Payload: pkg='com.whatsapp' id=1 title='' body='Sensitive notification content hidden'
+09-07 15:01:41.221 D/NotificationFilter(11169): ⛔ Filtered OUT: Excluded social/chat app 'com.whatsapp'
+09-07 15:01:41.221 D/PocketAuditService(11169): ⛔ Filtered OUT (NotificationFilter): pkg='com.whatsapp'
+09-07 15:01:45.679 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.google.android.apps.messaging' id=2
+09-07 15:01:45.682 D/PocketAuditService(11169): 📥 Raw Extracted Payload: pkg='com.google.android.apps.messaging' id=2 title='085209 57948' body='ALERT: Your account has been suspended!
+09-07 15:01:45.682 D/PocketAuditService(11169): ​We detected unauthorized access to your account ending in -8492. To restore access and prevent permanent termination, you must verify your credentials immediately.
+09-07 15:01:45.682 D/PocketAuditService(11169): ​Click here to restore your account: http://secure-banking-verify-update.com/login | Hello ALERT: Your account has been suspended!
+09-07 15:01:45.682 D/PocketAuditService(11169): ​We detected unauthorized access to your account ending in -8492. To restore access and prevent permanent termination, you must verify your credentials immediately.
+09-07 15:01:45.682 D/PocketAuditService(11169): ​Click here to restore your account: http://secure-banking-verify-update.com/login'
+09-07 15:01:45.682 D/NotificationFilter(11169): ✅ Filter PASSED: Messaging app 'com.google.android.apps.messaging' (matchedKeywords=true) -> forwarding to DetectionEngine
+09-07 15:01:45.682 I/PocketAuditService(11169): 🎯 TARGET Notification Passed Filter: pkg='com.google.android.apps.messaging' title='085209 57948'
+09-07 15:01:45.683 D/PocketAuditService(11169): 🔬 [START_DETECTION] Analyzing target notification: pkg='com.google.android.apps.messaging'
+09-07 15:01:45.688 I/AlertRepository(11169): 🔎 Detection result for pkg='com.google.android.apps.messaging': score=80% level=HIGH explanation='⚠️ Phishing Security Risk: This notification contains suspicious link patterns d'
+09-07 15:01:45.688 I/AlertRepository(11169): 💾 [INSERT_START] Inserting notification alert to Room DB: pkg='com.google.android.apps.messaging' level=HIGH score=80%
+09-07 15:01:45.695 I/AlertRepository(11169): ✅ [INSERT_DONE] Persisted alert with id=19 for pkg='com.google.android.apps.messaging'
+09-07 15:01:45.695 D/PocketAuditService(11169): 🏁 [END_DETECTION] Result for pkg='com.google.android.apps.messaging': score=80% level=HIGH
+09-07 15:01:45.695 W/PocketAuditService(11169): 🚨 SCAM ALERT FLAGGED [HIGH] Score:80% Type:PHISHING_LINK
+09-07 15:01:45.718 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.pocketaudit.app' id=1007
+09-07 15:01:51.408 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.google.android.apps.messaging' id=2
+09-07 15:01:51.409 D/PocketAuditService(11169): 📥 Raw Extracted Payload: pkg='com.google.android.apps.messaging' id=2 title='' body='Sensitive notification content hidden'
+09-07 15:01:51.410 D/NotificationFilter(11169): ✅ Filter PASSED: Messaging app 'com.google.android.apps.messaging' (matchedKeywords=false) -> forwarding to DetectionEngine
+09-07 15:01:51.410 I/PocketAuditService(11169): 🎯 TARGET Notification Passed Filter: pkg='com.google.android.apps.messaging' title=''
+09-07 15:01:51.410 D/PocketAuditService(11169): 🔬 [START_DETECTION] Analyzing target notification: pkg='com.google.android.apps.messaging'
+09-07 15:01:51.415 I/AlertRepository(11169): 🔎 Detection result for pkg='com.google.android.apps.messaging': score=0% level=SAFE explanation='No suspicious scam patterns detected in this notification.'
+09-07 15:01:51.415 I/AlertRepository(11169): 💾 [INSERT_START] Inserting notification alert to Room DB: pkg='com.google.android.apps.messaging' level=SAFE score=0%
+09-07 15:01:51.416 I/AlertRepository(11169): ✅ [INSERT_DONE] Persisted alert with id=20 for pkg='com.google.android.apps.messaging'
+09-07 15:01:51.416 D/PocketAuditService(11169): 🏁 [END_DETECTION] Result for pkg='com.google.android.apps.messaging': score=0% level=SAFE
+09-07 15:01:51.416 W/PocketAuditService(11169): 🚨 SCAM ALERT FLAGGED [SAFE] Score:0% Type:LEGITIMATE
+09-07 15:01:51.495 D/PocketAuditService(11169): 📥 [ON_NOTIFICATION_POSTED] Received raw notification: pkg='com.pocketaudit.app' id=1008

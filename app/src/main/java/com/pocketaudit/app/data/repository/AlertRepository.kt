@@ -37,28 +37,24 @@ class AlertRepository(
         val result = detectionEngine.analyze(packageName, title, body, contextHistory)
         android.util.Log.i("AlertRepository", "🔎 Detection result for pkg='$packageName': score=${result.riskScore}% level=${result.riskLevel} explanation='${result.explanation.take(80)}'")
 
-        var savedAlert: AlertEntity? = null
-
-        // Store if flagged as High or Medium risk (score >= 50)
-        if (result.riskScore >= 50) {
-            val alert = AlertEntity(
-                packageName = packageName,
-                appName = appName,
-                title = title,
-                body = body,
-                riskLevel = result.riskLevel,
-                riskScore = result.riskScore,
-                scamType = result.scamType,
-                matchedPatterns = result.matchedPatterns,
-                explanation = result.explanation
-            )
-            android.util.Log.i("AlertRepository", "💾 [INSERT_START] Inserting alert to Room DB: pkg='$packageName' score=${result.riskScore}%")
-            val insertedId = alertDao.insertAlert(alert)
-            savedAlert = alert.copy(id = insertedId)
-            android.util.Log.i("AlertRepository", "✅ [INSERT_DONE] Inserted alert with id=$insertedId for pkg='$packageName'")
-        } else {
-            android.util.Log.d("AlertRepository", "ℹ️ [SKIP_INSERT] Score=${result.riskScore}% < 50 — not storing as alert (safe message)")
-        }
+        // Store EVERY analyzed notification regardless of risk level (HIGH, MEDIUM, LOW/SAFE)
+        val isSafe = (result.riskLevel == RiskLevel.SAFE || result.riskLevel == RiskLevel.LOW || result.riskScore < 50)
+        val alert = AlertEntity(
+            packageName = packageName,
+            appName = appName,
+            title = title,
+            body = body,
+            riskLevel = result.riskLevel,
+            riskScore = result.riskScore,
+            scamType = result.scamType,
+            matchedPatterns = result.matchedPatterns,
+            explanation = result.explanation,
+            isSafe = isSafe
+        )
+        android.util.Log.i("AlertRepository", "💾 [INSERT_START] Inserting notification alert to Room DB: pkg='$packageName' level=${result.riskLevel} score=${result.riskScore}%")
+        val insertedId = alertDao.insertAlert(alert)
+        val savedAlert = alert.copy(id = insertedId)
+        android.util.Log.i("AlertRepository", "✅ [INSERT_DONE] Persisted alert with id=$insertedId for pkg='$packageName'")
 
         return Pair(result, savedAlert)
     }

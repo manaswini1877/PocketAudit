@@ -34,16 +34,16 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.settings_title), style = Typography.titleLarge) },
+                title = { Text(stringResource(R.string.settings_title), style = Typography.titleLarge, color = MaterialTheme.colorScheme.onSurface) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = TextPrimary)
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = BackgroundDark)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
             )
         },
-        containerColor = BackgroundDark
+        containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -56,8 +56,8 @@ fun SettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
-                border = androidx.compose.foundation.BorderStroke(1.dp, CardBorderDark)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -71,7 +71,8 @@ fun SettingsScreen(
                         Text(
                             text = stringResource(R.string.appearance),
                             style = Typography.titleLarge,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
 
@@ -101,8 +102,8 @@ fun SettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
-                border = androidx.compose.foundation.BorderStroke(1.dp, CardBorderDark)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -116,7 +117,8 @@ fun SettingsScreen(
                         Text(
                             text = stringResource(R.string.language_settings),
                             style = Typography.titleLarge,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
 
@@ -133,7 +135,7 @@ fun SettingsScreen(
                             Text(
                                 text = lang.displayName,
                                 style = Typography.bodyLarge,
-                                color = if (currentLanguage == lang) TechPurple else TextPrimary,
+                                color = if (currentLanguage == lang) TechPurple else MaterialTheme.colorScheme.onSurface,
                                 fontWeight = if (currentLanguage == lang) FontWeight.Bold else FontWeight.Normal
                             )
                             RadioButton(
@@ -152,8 +154,8 @@ fun SettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
-                border = androidx.compose.foundation.BorderStroke(1.dp, CardBorderDark)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -168,12 +170,13 @@ fun SettingsScreen(
                             Text(
                                 text = "Notification Listener Access",
                                 style = Typography.titleLarge,
-                                fontSize = 16.sp
+                                fontSize = 16.sp,
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
                                 text = "System permission management",
                                 style = Typography.labelMedium,
-                                color = TextSecondary
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                     }
@@ -197,8 +200,8 @@ fun SettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
-                border = androidx.compose.foundation.BorderStroke(1.dp, CardBorderDark)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -222,7 +225,7 @@ fun SettingsScreen(
                     Text(
                         text = stringResource(R.string.privacy_desc),
                         style = Typography.bodyMedium,
-                        color = TextSecondary,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 13.sp
                     )
                 }
@@ -247,7 +250,7 @@ private fun ThemeOptionRow(
         Text(
             text = title,
             style = Typography.bodyLarge,
-            color = if (selected) ElectricBlue else TextPrimary,
+            color = if (selected) ElectricBlue else MaterialTheme.colorScheme.onSurface,
             fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
         )
         RadioButton(

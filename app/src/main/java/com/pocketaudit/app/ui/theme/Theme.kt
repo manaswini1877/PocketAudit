@@ -20,18 +20,24 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = TextPrimary,
     onSecondary = TextPrimary,
     onBackground = TextPrimary,
-    onSurface = TextPrimary
+    onSurface = TextPrimary,
+    outline = CardBorderDark,
+    surfaceVariant = Color(0xFF21262D),
+    onSurfaceVariant = TextSecondary
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = ElectricBlue,
     secondary = TechPurple,
-    background = Color(0xFFF6F8FA),
+    background = Color(0xFFF1F5F9),
     surface = Color(0xFFFFFFFF),
-    onPrimary = Color(0xFF000000),
-    onSecondary = Color(0xFF000000),
-    onBackground = Color(0xFF000000),
-    onSurface = Color(0xFF000000)
+    onPrimary = Color(0xFFFFFFFF),
+    onSecondary = Color(0xFFFFFFFF),
+    onBackground = Color(0xFF0F172A),
+    onSurface = Color(0xFF0F172A),
+    outline = Color(0xFFCBD5E1),
+    surfaceVariant = Color(0xFFE2E8F0),
+    onSurfaceVariant = Color(0xFF475569)
 )
 
 @Composable

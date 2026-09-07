@@ -83,15 +83,11 @@ object NotificationFilter {
             return true
         }
 
-        // Check SMS & MMS messaging apps
+        // Check SMS & MMS messaging apps - analyze all SMS from recognized messaging apps
         if (MESSAGING_APP_PACKAGES.contains(packageName)) {
             val hasKeywords = containsFinancialKeywords(title, text)
-            if (hasKeywords) {
-                logDebug("NotificationFilter", "✅ Filter PASSED: Messaging app '$packageName' matched financial/scam keywords")
-            } else {
-                logDebug("NotificationFilter", "⛔ Filtered OUT: Messaging app '$packageName' did NOT match financial keywords in title='$title' text='$text'")
-            }
-            return hasKeywords
+            logDebug("NotificationFilter", "✅ Filter PASSED: Messaging app '$packageName' (matchedKeywords=$hasKeywords) -> forwarding to DetectionEngine")
+            return true
         }
 
         // Check default system SMS app if context is provided
@@ -100,15 +96,11 @@ object NotificationFilter {
                 val defaultSmsPkg = Telephony.Sms.getDefaultSmsPackage(context)
                 if (defaultSmsPkg != null && defaultSmsPkg == packageName) {
                     val hasKeywords = containsFinancialKeywords(title, text)
-                    if (hasKeywords) {
-                        logDebug("NotificationFilter", "✅ Filter PASSED: Default SMS app '$packageName' matched keywords")
-                    } else {
-                        logDebug("NotificationFilter", "⛔ Filtered OUT: Default SMS app '$packageName' did NOT match keywords")
-                    }
-                    return hasKeywords
+                    logDebug("NotificationFilter", "✅ Filter PASSED: Default SMS app '$packageName' (matchedKeywords=$hasKeywords) -> forwarding to DetectionEngine")
+                    return true
                 }
             } catch (e: Exception) {
-                // Fallback graceful check
+                // Ignore telephony exceptions
             }
         }
 

@@ -59,10 +59,10 @@ fun AlertDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.alert_detail_title), style = Typography.titleLarge) },
+                title = { Text(stringResource(R.string.alert_detail_title), style = Typography.titleLarge, color = MaterialTheme.colorScheme.onSurface) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = TextPrimary)
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = MaterialTheme.colorScheme.onSurface)
                     }
                 },
                 actions = {
@@ -70,10 +70,10 @@ fun AlertDetailScreen(
                         Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.delete_alert), tint = RiskHighRed)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = BackgroundDark)
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface)
             )
         },
-        containerColor = BackgroundDark
+        containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -133,7 +133,7 @@ fun AlertDetailScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                 border = androidx.compose.foundation.BorderStroke(1.dp, ElectricBlue)
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
@@ -159,7 +159,7 @@ fun AlertDetailScreen(
                         text = alert.explanation.ifBlank { "This notification was flagged by PocketAudit on-device analysis due to detected financial scam risk patterns." },
                         style = Typography.bodyLarge,
                         fontSize = 15.sp,
-                        color = TextPrimary,
+                        color = MaterialTheme.colorScheme.onSurface,
                         lineHeight = 22.sp,
                         fontWeight = FontWeight.Medium
                     )
@@ -172,8 +172,8 @@ fun AlertDetailScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
-                border = androidx.compose.foundation.BorderStroke(1.dp, CardBorderDark)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -231,14 +231,14 @@ fun AlertDetailScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = CardSurfaceDark),
-                border = androidx.compose.foundation.BorderStroke(1.dp, CardBorderDark)
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.5f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
                         text = stringResource(R.string.original_payload),
                         style = Typography.labelMedium,
-                        color = TextMuted
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -256,7 +256,7 @@ fun AlertDetailScreen(
                         Text(
                             text = timestampText,
                             style = Typography.labelMedium,
-                            color = TextMuted
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
@@ -265,7 +265,8 @@ fun AlertDetailScreen(
                     Text(
                         text = alert.title,
                         style = Typography.bodyLarge,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
 
                     Spacer(modifier = Modifier.height(4.dp))
@@ -273,7 +274,7 @@ fun AlertDetailScreen(
                     Text(
                         text = alert.body,
                         style = Typography.bodyMedium,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
                     Spacer(modifier = Modifier.height(6.dp))

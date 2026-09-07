@@ -80,7 +80,9 @@ object VerdictNotifier {
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
 
-        val notificationId = (System.currentTimeMillis() % 100000).toInt()
+        val notificationId = notificationIdGen.incrementAndGet()
         notificationManager.notify(notificationId, builder.build())
     }
+
+    private val notificationIdGen = java.util.concurrent.atomic.AtomicInteger(1000)
 }
