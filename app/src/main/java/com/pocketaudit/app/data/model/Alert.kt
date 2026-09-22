@@ -1,7 +1,10 @@
 package com.pocketaudit.app.data.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.pocketaudit.app.detection.DecidedBy
+import com.pocketaudit.app.detection.RiskSource
 
 enum class RiskLevel {
     HIGH,
@@ -33,5 +36,9 @@ data class AlertEntity(
     val explanation: String,
     val timestamp: Long = System.currentTimeMillis(),
     val isRead: Boolean = false,
-    val isSafe: Boolean = false
+    val isSafe: Boolean = false,
+    @ColumnInfo(defaultValue = "'NOTIFICATION'")
+    val source: RiskSource = RiskSource.NOTIFICATION,
+    @ColumnInfo(defaultValue = "'RULES'")
+    val decidedBy: DecidedBy = DecidedBy.RULES
 )

@@ -1,34 +1,39 @@
-# Gradle
+# Android / Gradle build outputs
 .gradle/
 build/
-**/build/
+app/build/
+app - Copy/
+app - Copy/build/
 
-# Android Studio
+# Local properties (contains SDK path - machine-specific)
+local.properties
+local - Copy.properties
+
+# Copy artefacts from earlier duplicated project
+*- Copy*
+build - Copy/
+gradle - Copy/
+scratch - Copy/
+gradlew\ -\ Copy.bat
+gradlew\ -\ Copy*
+
+# Scratch / temp scripts
+scratch/
+
+# IDE files
 .idea/
 *.iml
-
-# Local configuration
-local.properties
-
-# Gradle wrapper generated files
-.gradle/
-
-# OS files
+*.iws
 .DS_Store
 Thumbs.db
 
-# Kotlin
-.kotlin/
+# Signing keys (never commit these)
+*.jks
+*.keystore
 
-# APK / AAB
-*.apk
-*.aab
+# Generated files
+gen/
+out/
 
-# Generated Android files
-captures/
-.externalNativeBuild/
-.cxx/
-
-# Temporary files
-*.log
-*.tmp
+# Lint
+lint/

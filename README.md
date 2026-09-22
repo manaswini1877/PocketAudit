@@ -108,4 +108,3 @@ PocketAudit's `AndroidManifest.xml` explicitly omits network permissions:
 ```
 
 All data processing, pattern matching, and persistence are performed exclusively on your local device.
-"# PocketAudit" 

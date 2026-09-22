@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.pocketaudit.app.MainActivity
 import com.pocketaudit.app.data.model.RiskLevel
-import com.pocketaudit.app.detection.DetectionResult
+import com.pocketaudit.app.detection.RiskResult
 
 object VerdictNotifier {
 
@@ -37,7 +37,7 @@ object VerdictNotifier {
         appName: String,
         title: String,
         body: String,
-        result: DetectionResult
+        result: RiskResult
     ) {
         createNotificationChannel(context)
 
@@ -53,15 +53,15 @@ object VerdictNotifier {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val (verdictTitle, verdictBody, iconRes) = when (result.riskLevel) {
+        val (verdictTitle, verdictBody, iconRes) = when (result.level) {
             RiskLevel.HIGH -> Triple(
-                "🚨 SCAM ALERT (${result.riskScore}% Risk)",
-                "$appName: ${result.matchedPatterns.firstOrNull() ?: result.explanation}",
+                "🚨 SCAM ALERT (${result.score}% Risk)",
+                "$appName: ${result.reasons.firstOrNull() ?: result.summary}",
                 android.R.drawable.ic_dialog_alert
             )
             RiskLevel.MEDIUM -> Triple(
-                "⚠️ SUSPICIOUS (${result.riskScore}% Risk)",
-                "$appName: ${result.matchedPatterns.firstOrNull() ?: result.explanation}",
+                "⚠️ SUSPICIOUS (${result.score}% Risk)",
+                "$appName: ${result.reasons.firstOrNull() ?: result.summary}",
                 android.R.drawable.ic_dialog_info
             )
             RiskLevel.LOW, RiskLevel.SAFE -> Triple(

@@ -1,0 +1,20 @@
+# Sample QR payloads for manual testing
+# Encode each line (the URI only) as a QR image. Do not use real merchant VPAs.
+
+# SAFE 1 — typical tea-shop UPI QR
+upi://pay?pa=ravi.kumar@oksbi&pn=Ravi%20Kumar&am=120.00&cu=INR&tn=Tea
+
+# SAFE 2 — merchant QR with no pre-filled amount
+upi://pay?pa=suresh.stores@ybl&pn=Suresh%20Stores&cu=INR
+
+# SAFE 3 — non-UPI HTTPS info page (no URL-risk signals)
+https://www.npci.org.in/what-we-do/upi/product-overview
+
+# SCAM 1 — high amount + lottery note + random VPA + brand-name mismatch
+upi://pay?pa=xqzvnmwptrkb@ybl&pn=Amazon%20Pay&am=75000&cu=INR&tn=Claim%20lottery%20prize%20urgent
+
+# SCAM 2 — UPI url param pointing at an http shortener + KYC wording
+upi://pay?pa=refundnow@paytm&pn=Refund%20Desk&am=1&tn=KYC%20update&url=http://bit.ly/upi-kyc
+
+# SCAM 3 — non-UPI QR with IP host, http, and obfuscated path
+http://185.22.11.9/login?next=%2Fpay%2F%2F%2F%2F%2F%2F%2F%2F%2F%2Fverify%2Fkyc%2Faaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

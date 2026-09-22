@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.sp
 import com.pocketaudit.app.R
 import com.pocketaudit.app.data.model.AlertEntity
 import com.pocketaudit.app.data.model.RiskLevel
+import com.pocketaudit.app.detection.DecidedBy
+import com.pocketaudit.app.ui.common.riskSourcePresentation
 import com.pocketaudit.app.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -123,6 +125,33 @@ fun AlertDetailScreen(
                             fontSize = 14.sp,
                             color = if (alert.isSafe) RiskLowGreen else riskColor
                         )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            val sourceUi = riskSourcePresentation(alert.source)
+            val decidedLabel = when (alert.decidedBy) {
+                DecidedBy.RULES -> stringResource(R.string.decided_by_rules)
+                DecidedBy.ON_DEVICE_AI -> stringResource(R.string.decided_by_ai)
+            }
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                Row(
+                    modifier = Modifier.padding(14.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(sourceUi.icon, contentDescription = null, tint = ElectricBlue)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column {
+                        Text(stringResource(R.string.analysis_source), style = Typography.labelMedium, color = TextSecondary)
+                        Text(sourceUi.label, style = Typography.titleLarge, fontSize = 15.sp)
+                        Text(decidedLabel, style = Typography.bodyMedium, color = TextSecondary, fontSize = 13.sp)
                     }
                 }
             }

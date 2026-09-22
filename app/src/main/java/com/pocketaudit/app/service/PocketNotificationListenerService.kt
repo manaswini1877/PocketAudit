@@ -14,7 +14,7 @@ import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.pocketaudit.app.MainActivity
-import com.pocketaudit.app.data.local.AppDatabase
+import com.pocketaudit.app.PocketAuditApp
 import com.pocketaudit.app.data.repository.AlertRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,8 @@ class PocketNotificationListenerService : NotificationListenerService() {
 
     private var serviceJob = SupervisorJob()
     private var serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
-    private lateinit var repository: AlertRepository
+    private val repository: AlertRepository
+        get() = PocketAuditApp.instance.alertRepository
 
     private fun ensureActiveScope(): CoroutineScope {
         if (serviceJob.isCancelled || serviceJob.isCompleted) {
@@ -38,8 +39,6 @@ class PocketNotificationListenerService : NotificationListenerService() {
 
     override fun onCreate() {
         super.onCreate()
-        val database = AppDatabase.getDatabase(applicationContext)
-        repository = AlertRepository(database.alertDao())
         VerdictNotifier.createNotificationChannel(applicationContext)
         createForegroundNotificationChannel()
         startForegroundServiceNotification()
@@ -215,12 +214,12 @@ class PocketNotificationListenerService : NotificationListenerService() {
                     Log.d(TAG, "🔬 [START_DETECTION] Analyzing target notification: pkg='$packageName'")
                     val appName = NotificationFilter.getAppNameForPackage(packageName)
                     val (result, alert) = repository.analyzeAndStoreNotification(packageName, title, combinedBody)
-                    Log.d(TAG, "🏁 [END_DETECTION] Result for pkg='$packageName': score=${result.riskScore}% level=${result.riskLevel}")
+                    Log.d(TAG, "🏁 [END_DETECTION] Result for pkg='$packageName': score=${result.score}% level=${result.level}")
 
                     if (alert != null) {
                         Log.w(TAG, "🚨 SCAM ALERT FLAGGED [${alert.riskLevel}] Score:${alert.riskScore}% Type:${alert.scamType}")
                     } else {
-                        Log.i(TAG, "✅ SAFE Message Verified [${result.riskLevel}] Score:${result.riskScore}%")
+                        Log.i(TAG, "✅ SAFE Message Verified [${result.level}] Score:${result.score}%")
                     }
 
                     // Immediately post real-time Android verdict notification back to user

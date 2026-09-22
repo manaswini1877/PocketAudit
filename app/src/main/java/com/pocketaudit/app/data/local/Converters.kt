@@ -3,6 +3,8 @@ package com.pocketaudit.app.data.local
 import androidx.room.TypeConverter
 import com.pocketaudit.app.data.model.RiskLevel
 import com.pocketaudit.app.data.model.ScamType
+import com.pocketaudit.app.detection.DecidedBy
+import com.pocketaudit.app.detection.RiskSource
 
 class Converters {
 
@@ -24,6 +26,26 @@ class Converters {
         ScamType.valueOf(value)
     } catch (e: Exception) {
         ScamType.UNKNOWN_SUSPICIOUS
+    }
+
+    @TypeConverter
+    fun fromRiskSource(source: RiskSource): String = source.name
+
+    @TypeConverter
+    fun toRiskSource(value: String): RiskSource = try {
+        RiskSource.valueOf(value)
+    } catch (e: Exception) {
+        RiskSource.NOTIFICATION
+    }
+
+    @TypeConverter
+    fun fromDecidedBy(decidedBy: DecidedBy): String = decidedBy.name
+
+    @TypeConverter
+    fun toDecidedBy(value: String): DecidedBy = try {
+        DecidedBy.valueOf(value)
+    } catch (e: Exception) {
+        DecidedBy.RULES
     }
 
     @TypeConverter

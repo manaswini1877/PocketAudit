@@ -36,4 +36,41 @@
     <string name="original_payload">Original Notification Payload</string>
     <string name="mark_as_safe">Mark Transaction as Safe</string>
     <string name="delete_alert">Delete Alert</string>
+
+    <!-- Check message / share -->
+    <string name="check_message_title">Check a message or link</string>
+    <string name="check_message_subtitle">Paste a suspicious SMS, UPI message, or link. Everything stays on your device.</string>
+    <string name="check_message_hint">Message or link text</string>
+    <string name="check_message_empty">Enter some text to analyze.</string>
+    <string name="paste_clipboard">Paste from clipboard</string>
+    <string name="pick_screenshot">Pick screenshot</string>
+    <string name="check_analyze">Analyze</string>
+    <string name="analysing_on_device">Analysing on-device…</string>
+    <string name="clipboard_empty">Clipboard is empty.</string>
+    <string name="risk_result_title">Analysis result</string>
+    <string name="decided_by_rules">Decided by: Rules</string>
+    <string name="decided_by_ai">Decided by: On-device AI</string>
+    <string name="extracted_text_preview">Analysed text preview</string>
+    <string name="no_rules_matched">No specific rule phrases matched.</string>
+    <string name="open_in_history">Open full history detail</string>
+    <string name="analysis_source">Source</string>
+
+    <!-- QR scan -->
+    <string name="scan_qr_title">Scan QR</string>
+    <string name="scan_qr_subtitle">Point the camera at a UPI or payment QR. Scanning stays on this device.</string>
+    <string name="scan_qr_rationale">PocketAudit uses the camera only while you scan a QR, to read the code on-device. Nothing is uploaded.</string>
+    <string name="camera_permission_allow">Allow camera</string>
+    <string name="camera_permission_denied">Camera access is off, so QR scanning cannot start. You can allow it in system settings, or go back and check a message instead.</string>
+    <string name="camera_permission_open_settings">Open app settings</string>
+    <string name="camera_unavailable">The camera could not be started on this device.</string>
+    <string name="rescan_qr">Rescan</string>
+    <string name="qr_captured">QR captured. Analysing on-device…</string>
+    <string name="qr_payee_name">Payee name</string>
+    <string name="qr_payee_vpa">VPA</string>
+    <string name="qr_amount">Amount</string>
+    <string name="qr_field_missing">Not in this QR</string>
+    <string name="qr_amount_not_set">Not pre-filled</string>
+    <string name="qr_compare_shop_board">Compare this with the name on the shop board before paying.</string>
+    <string name="qr_cannot_verify_vpa">Offline, PocketAudit cannot verify who owns a VPA.</string>
+    <string name="qr_not_upi">This QR is not a UPI pay code. Review the content below before acting on it.</string>
 </resources>

@@ -35,8 +35,8 @@ class DetectionEngine(
         val highestRiskResult = results.maxByOrNull { it.riskScore } ?: return DetectionResult.safe()
         logDebug("DetectionEngine", "🏁 Detection finished for pkg='$packageName': maxRiskScore=${highestRiskResult.riskScore}%")
 
-        // Threshold tuning: scores under 50 are safe / unflagged
-        if (highestRiskResult.riskScore < 50) {
+        // Threshold tuning: scores under 30 are safe / unflagged
+        if (highestRiskResult.riskScore < 30) {
             return DetectionResult.safe()
         }
 
@@ -47,7 +47,7 @@ class DetectionEngine(
         val clampedScore = highestRiskResult.riskScore.coerceIn(0, 100)
 
         // Risk Level classification tuning
-        val riskLevel = if (clampedScore >= 75) RiskLevel.HIGH else RiskLevel.MEDIUM
+        val riskLevel = if (clampedScore >= 70) RiskLevel.HIGH else RiskLevel.MEDIUM
 
         return DetectionResult(
             riskScore = clampedScore,

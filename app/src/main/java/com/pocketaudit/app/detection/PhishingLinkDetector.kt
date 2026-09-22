@@ -96,8 +96,8 @@ class PhishingLinkDetector : ScamDetector {
             }
         }
 
-        // If no link was found or score is under 50, it is safe
-        if (!foundUrl || score < 50) {
+        // If no link was found or score is under 30, it is safe
+        if (!foundUrl || score < 30) {
             return DetectionResult.safe()
         }
 

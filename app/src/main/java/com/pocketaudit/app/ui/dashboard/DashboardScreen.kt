@@ -25,6 +25,7 @@ import com.pocketaudit.app.R
 import com.pocketaudit.app.data.model.AlertEntity
 import com.pocketaudit.app.data.model.RiskLevel
 import com.pocketaudit.app.data.model.ScamType
+import com.pocketaudit.app.ui.common.riskSourcePresentation
 import com.pocketaudit.app.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,6 +34,8 @@ fun DashboardScreen(
     alerts: List<AlertEntity>,
     onAlertClick: (Long) -> Unit,
     onOpenDemoMode: () -> Unit,
+    onOpenCheckMessage: () -> Unit,
+    onOpenScanQr: () -> Unit,
     onOpenSettings: () -> Unit,
     onClearAll: () -> Unit
 ) {
@@ -100,14 +103,32 @@ fun DashboardScreen(
             )
         },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = onOpenDemoMode,
-                containerColor = TechPurple,
-                contentColor = Color.White,
-                shape = RoundedCornerShape(16.dp),
-                icon = { Icon(Icons.Default.PlayArrow, contentDescription = stringResource(R.string.demo_simulator_mode)) },
-                text = { Text(stringResource(R.string.demo_simulator_mode), fontWeight = FontWeight.Bold) }
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                ExtendedFloatingActionButton(
+                    onClick = onOpenScanQr,
+                    containerColor = ElectricBlue,
+                    contentColor = Color.White,
+                    shape = RoundedCornerShape(16.dp),
+                    icon = { Icon(Icons.Default.QrCodeScanner, contentDescription = stringResource(R.string.scan_qr_title)) },
+                    text = { Text(stringResource(R.string.scan_qr_title), fontWeight = FontWeight.Bold) }
+                )
+                ExtendedFloatingActionButton(
+                    onClick = onOpenCheckMessage,
+                    containerColor = ElectricBlue,
+                    contentColor = Color.White,
+                    shape = RoundedCornerShape(16.dp),
+                    icon = { Icon(Icons.Default.Search, contentDescription = stringResource(R.string.check_message_title)) },
+                    text = { Text(stringResource(R.string.check_message_title), fontWeight = FontWeight.Bold) }
+                )
+                ExtendedFloatingActionButton(
+                    onClick = onOpenDemoMode,
+                    containerColor = TechPurple,
+                    contentColor = Color.White,
+                    shape = RoundedCornerShape(16.dp),
+                    icon = { Icon(Icons.Default.PlayArrow, contentDescription = stringResource(R.string.demo_simulator_mode)) },
+                    text = { Text(stringResource(R.string.demo_simulator_mode), fontWeight = FontWeight.Bold) }
+                )
+            }
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
@@ -280,7 +301,7 @@ fun DashboardScreen(
                 LazyColumn(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(bottom = 80.dp)
+                    contentPadding = PaddingValues(bottom = 200.dp)
                 ) {
                     items(filteredAlerts, key = { it.id }) { alert ->
                         AlertCardItem(
@@ -346,6 +367,8 @@ fun AlertCardItem(
         System.currentTimeMillis(),
         DateUtils.MINUTE_IN_MILLIS
     ).toString()
+
+    val sourceUi = riskSourcePresentation(alert.source)
 
     Card(
         modifier = Modifier
@@ -421,12 +444,21 @@ fun AlertCardItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = if (isSafe) "✅ Verified Safe Transaction" else getScamLabel(alert.scamType),
-                    style = Typography.labelMedium,
-                    color = if (isSafe) RiskLowGreen else TechPurple,
-                    fontWeight = FontWeight.SemiBold
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = sourceUi.icon,
+                        contentDescription = sourceUi.label,
+                        tint = ElectricBlue,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = sourceUi.label,
+                        style = Typography.labelMedium,
+                        color = ElectricBlue,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
 
                 Text(
                     text = timeAgo,
@@ -434,6 +466,15 @@ fun AlertCardItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Text(
+                text = if (isSafe) "✅ Verified Safe Transaction" else getScamLabel(alert.scamType),
+                style = Typography.labelMedium,
+                color = if (isSafe) RiskLowGreen else TechPurple,
+                fontWeight = FontWeight.SemiBold
+            )
         }
     }
 }
